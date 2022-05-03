@@ -1,5 +1,7 @@
+import 'package:dice_app/start_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+
 
 class DicePage extends StatefulWidget {
   @override
@@ -22,23 +24,15 @@ class _DicePageState extends State<DicePage> {
     return Center(
       child: Column(
         children: [
-          Expanded(
-            child: Center(
-              child: Container(
-                child:Text('6',
-                style: TextStyle(
-                  decoration: TextDecoration.none,
-                  color: Colors.white
-                ),  
-                ),
-                padding: EdgeInsets.all(16.0),
-                decoration: BoxDecoration ( 
-                  border: Border.all(
-                  color: Colors.red,
-                  width: 10.0
-                  ),  
-                ),
-              ),
+          Container(
+            child: Text(
+              '6',
+              style: TextStyle(
+                  decoration: TextDecoration.none, color: Colors.white),
+            ),
+            padding: EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red, width: 10.0),
             ),
           ),
           Expanded(
@@ -47,25 +41,33 @@ class _DicePageState extends State<DicePage> {
                 Expanded(
                   child: TextButton(
                     child: Image.asset('images/dice$leftDiceNumber.png'),
-                    onPressed: () => {
-                      changeDiceFace()
-                    },
+                    onPressed: () => {changeDiceFace()},
                   ),
                 ),
                 Expanded(
                   child: TextButton(
                     child: Image.asset('images/dice$rightDiceNumber.png'),
-                    onPressed: () => {
-                      changeDiceFace()
-                    },
+                    onPressed: () => {changeDiceFace()},
                   ),
                 ),
               ],
             ),
           ),
+          Container(
+            child: TextButton(
+              child: Text('Go back'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return StartPage();
+                  }),
+                );
+              },
+            ),
+          )
         ],
       ),
     );
   }
 }
-
