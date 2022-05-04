@@ -2,7 +2,6 @@ import 'package:dice_app/start_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-
 class DicePage extends StatefulWidget {
   @override
   _DicePageState createState() => _DicePageState();
@@ -19,6 +18,8 @@ class _DicePageState extends State<DicePage> {
     });
   }
 
+  int randomNumber = Random().nextInt(12 + 1 - 2) + 2;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -26,7 +27,7 @@ class _DicePageState extends State<DicePage> {
         children: [
           Container(
             child: Text(
-              '6',
+              '$randomNumber',
               style: TextStyle(
                   decoration: TextDecoration.none, color: Colors.white),
             ),
