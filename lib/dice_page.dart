@@ -23,7 +23,6 @@ class _DicePageState extends State<DicePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Column(
         children: [
@@ -47,9 +46,51 @@ class _DicePageState extends State<DicePage> {
                     onPressed: () => {
                       changeDiceFace(),
                       if (playerNumber >= randomNumber)
-                        {print('$playerNumber + You won')}
+                        {
+                          print('$playerNumber + You won'),
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('You won'),
+                              content: const Text(
+                                  'Are you feeling lucky? Play again!'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        }
                       else
-                        {print('$playerNumber +  You lose')}
+                        {
+                          print('$playerNumber +  You lose'),
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('You lose'),
+                              content:
+                                  const Text('The house wins, play again!'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        }
                     },
                   ),
                 ),
@@ -59,9 +100,51 @@ class _DicePageState extends State<DicePage> {
                     onPressed: () => {
                       changeDiceFace(),
                       if (playerNumber >= randomNumber)
-                        {print('$playerNumber + You won')}
+                        {
+                          print('$playerNumber + You won'),
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('You won'),
+                              content: const Text(
+                                  'Are you feeling lucky? Play again!'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        }
                       else
-                        {print('$playerNumber +  You lose')}
+                        {
+                          print('$playerNumber +  You lose'),
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('You lose'),
+                              content:
+                                  const Text('The house wins, play again!'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        }
                     },
                   ),
                 ),
