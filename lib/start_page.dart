@@ -11,7 +11,7 @@ class StartPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                'To play the dice game simply tap on the dice to roll them. If your number is equal or higher than the one on the red square, you won!',
+                'To play the dice game simply tap on the dice to roll them. If your number is equal or higher than the one on the red square, you won! Best out of three, wins the game. Good luck!',
                 style: TextStyle(fontSize: 25.0, fontFamily: 'Poppins'),
                 textAlign: TextAlign.center,
               ),

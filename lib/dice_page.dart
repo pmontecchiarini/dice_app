@@ -21,6 +21,17 @@ class _DicePageState extends State<DicePage> {
     });
   }
 
+  List<Widget> scoreKeeper = [
+    Icon(
+      Icons.check_box_rounded,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.crop_square_sharp,
+      color: Colors.red,
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -48,6 +59,10 @@ class _DicePageState extends State<DicePage> {
                       if (playerNumber >= randomNumber)
                         {
                           print('$playerNumber + You won'),
+                          scoreKeeper.add(Icon(
+                            Icons.check_box_rounded,
+                            color: Colors.green,
+                          )),
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
@@ -71,6 +86,10 @@ class _DicePageState extends State<DicePage> {
                       else
                         {
                           print('$playerNumber +  You lose'),
+                          scoreKeeper.add(Icon(
+                            Icons.crop_square_sharp,
+                            color: Colors.red,
+                          )),
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
@@ -102,6 +121,10 @@ class _DicePageState extends State<DicePage> {
                       if (playerNumber >= randomNumber)
                         {
                           print('$playerNumber + You won'),
+                          scoreKeeper.add(Icon(
+                            Icons.check_box_rounded,
+                            color: Colors.green,
+                          )),
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
@@ -125,6 +148,9 @@ class _DicePageState extends State<DicePage> {
                       else
                         {
                           print('$playerNumber +  You lose'),
+                          scoreKeeper.add(
+                            Icon(Icons.crop_square_sharp, color: Colors.red),
+                          ),
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
@@ -150,6 +176,10 @@ class _DicePageState extends State<DicePage> {
                 ),
               ],
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: scoreKeeper,
           ),
           Container(
             child: TextButton(
