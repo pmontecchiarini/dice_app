@@ -32,10 +32,10 @@ class _DicePageState extends State<DicePage> {
     )
   ];
 
-  Expanded newDice() {
+  Expanded newDice({int diceNum}) {
     return Expanded(
       child: TextButton(
-        child: Image.asset('images/dice$leftDiceNumber.png'),
+        child: Image.asset('images/dice$diceNum.png'),
         onPressed: () => {
           changeDiceFace(),
           if (playerNumber >= randomNumber)
@@ -111,7 +111,9 @@ class _DicePageState extends State<DicePage> {
           ),
           Expanded(
             child: Row(
-              children: [newDice(), newDice()
+              children: [
+                newDice(diceNum: leftDiceNumber),
+                newDice(diceNum: rightDiceNumber)
               ],
             ),
           ),
