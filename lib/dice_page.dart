@@ -32,6 +32,67 @@ class _DicePageState extends State<DicePage> {
     )
   ];
 
+  Expanded newDice() {
+    return Expanded(
+      child: TextButton(
+        child: Image.asset('images/dice$leftDiceNumber.png'),
+        onPressed: () => {
+          changeDiceFace(),
+          if (playerNumber >= randomNumber)
+            {
+              print('$playerNumber + You won'),
+              scoreKeeper.add(Icon(
+                Icons.check_box_rounded,
+                color: Colors.green,
+              )),
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('You won'),
+                  content: const Text('Are you feeling lucky? Play again!'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              ),
+            }
+          else
+            {
+              print('$playerNumber +  You lose'),
+              scoreKeeper.add(Icon(
+                Icons.crop_square_sharp,
+                color: Colors.red,
+              )),
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('You lose'),
+                  content: const Text('The house wins, play again!'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              ),
+            }
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -50,130 +111,7 @@ class _DicePageState extends State<DicePage> {
           ),
           Expanded(
             child: Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    child: Image.asset('images/dice$leftDiceNumber.png'),
-                    onPressed: () => {
-                      changeDiceFace(),
-                      if (playerNumber >= randomNumber)
-                        {
-                          print('$playerNumber + You won'),
-                          scoreKeeper.add(Icon(
-                            Icons.check_box_rounded,
-                            color: Colors.green,
-                          )),
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text('You won'),
-                              content: const Text(
-                                  'Are you feeling lucky? Play again!'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        }
-                      else
-                        {
-                          print('$playerNumber +  You lose'),
-                          scoreKeeper.add(Icon(
-                            Icons.crop_square_sharp,
-                            color: Colors.red,
-                          )),
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text('You lose'),
-                              content:
-                                  const Text('The house wins, play again!'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        }
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: TextButton(
-                    child: Image.asset('images/dice$rightDiceNumber.png'),
-                    onPressed: () => {
-                      changeDiceFace(),
-                      if (playerNumber >= randomNumber)
-                        {
-                          print('$playerNumber + You won'),
-                          scoreKeeper.add(Icon(
-                            Icons.check_box_rounded,
-                            color: Colors.green,
-                          )),
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text('You won'),
-                              content: const Text(
-                                  'Are you feeling lucky? Play again!'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        }
-                      else
-                        {
-                          print('$playerNumber +  You lose'),
-                          scoreKeeper.add(
-                            Icon(Icons.crop_square_sharp, color: Colors.red),
-                          ),
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text('You lose'),
-                              content:
-                                  const Text('The house wins, play again!'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        }
-                    },
-                  ),
-                ),
+              children: [newDice(), newDice()
               ],
             ),
           ),
