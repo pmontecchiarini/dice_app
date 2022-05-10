@@ -21,16 +21,24 @@ class _DicePageState extends State<DicePage> {
     });
   }
 
-  List<Widget> scoreKeeper = [
-    Icon(
-      Icons.check_box_rounded,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.crop_square_sharp,
-      color: Colors.red,
-    )
-  ];
+  List<Widget> scoreKeeper = [];
+
+  AlertDialog endGameMessage({String endText}) {
+    return AlertDialog(
+      title: Text('GAME OVER'),
+      content: Text(endText),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'Cancel'),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'OK'),
+          child: const Text('OK'),
+        ),
+      ],
+    );
+  }
 
   Expanded newDice({int diceNum}) {
     return Expanded(
@@ -40,52 +48,28 @@ class _DicePageState extends State<DicePage> {
           changeDiceFace(),
           if (playerNumber >= randomNumber)
             {
-              print('$playerNumber + You won'),
+              //Add check icon to the score keeper
               scoreKeeper.add(Icon(
                 Icons.check_box_rounded,
                 color: Colors.green,
               )),
               showDialog<String>(
                 context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('You won'),
-                  content: const Text('Are you feeling lucky? Play again!'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ),
+                  builder: (BuildContext context) =>
+                      endGameMessage(endText: 'You win. Play again?')
               ),
             }
-          else
+          else if (playerNumber < randomNumber)
             {
-              print('$playerNumber +  You lose'),
+              //Add cross to the scroe
               scoreKeeper.add(Icon(
-                Icons.crop_square_sharp,
+                Icons.close,
                 color: Colors.red,
               )),
               showDialog<String>(
                 context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('You lose'),
-                  content: const Text('The house wins, play again!'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ),
+                  builder: (BuildContext context) => endGameMessage(
+                      endText: 'You lose. Would you like a rematch?')
               ),
             }
         },
