@@ -13,6 +13,7 @@ class _DicePageState extends State<DicePage> {
   int playerNumber;
   int randomNumber = Random().nextInt(12 - 3) + 3;
 
+//Method for when the player rolles the dice
   void changeDiceFace() {
     setState(() {
       leftDiceNumber = Random().nextInt(6) + 1; //add + 1 so I never get 0
@@ -22,6 +23,18 @@ class _DicePageState extends State<DicePage> {
   }
 
   List<Widget> scoreKeeper = [];
+  List<int> scoreKeeperNum = [];
+
+  bool checkScore() {
+    List<int> ones = scoreKeeperNum.where((number) => number == 1).toList();
+    List<int> zeros = scoreKeeperNum.where((number) => number == 0).toList();
+
+    if (ones.length > zeros.length) {
+      return true;
+    }
+
+    return false;
+  }
 
   AlertDialog endGameMessage({String endText}) {
     return AlertDialog(
@@ -29,11 +42,21 @@ class _DicePageState extends State<DicePage> {
       content: Text(endText),
       actions: <Widget>[
         TextButton(
-          onPressed: () => Navigator.pop(context, 'Cancel'),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return StartPage();
+            }),
+          ),
           child: const Text('Cancel'),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context, 'OK'),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return DicePage();
+            }),
+          ),
           child: const Text('OK'),
         ),
       ],
@@ -43,37 +66,52 @@ class _DicePageState extends State<DicePage> {
   Expanded newDice({int diceNum}) {
     return Expanded(
       child: TextButton(
-        child: Image.asset('images/dice$diceNum.png'),
-        onPressed: () => {
-          changeDiceFace(),
-          if (playerNumber >= randomNumber)
-            {
-              //Add check icon to the score keeper
-              scoreKeeper.add(Icon(
-                Icons.check_box_rounded,
-                color: Colors.green,
-              )),
-              showDialog<String>(
-                context: context,
-                  builder: (BuildContext context) =>
-                      endGameMessage(endText: 'You win. Play again?')
-              ),
-            }
-          else if (playerNumber < randomNumber)
-            {
-              //Add cross to the scroe
-              scoreKeeper.add(Icon(
-                Icons.close,
-                color: Colors.red,
-              )),
-              showDialog<String>(
-                context: context,
-                  builder: (BuildContext context) => endGameMessage(
-                      endText: 'You lose. Would you like a rematch?')
-              ),
-            }
-        },
-      ),
+          child: Image.asset('images/dice$diceNum.png'),
+          onPressed: () => {
+                changeDiceFace(),
+                if (scoreKeeper.length < 3)
+                  {
+                    if (playerNumber >= randomNumber)
+                      {
+                        //Add check icon to the score keeper
+                        scoreKeeper.add(Icon(
+                          Icons.check_box_rounded,
+                          color: Colors.green,
+                        )),
+                        //Add a 1 to the score keeper number
+                        scoreKeeperNum.add(1)
+                      }
+                    else
+                      {
+                        //Add cross to the score
+                        scoreKeeper.add(Icon(
+                          Icons.close,
+                          color: Colors.red,
+                        )),
+                        //Add a 0 to the score
+                        scoreKeeperNum.add(0)
+                      }
+                  }
+                else
+                  {
+                    if (checkScore())
+                      {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              endGameMessage(endText: 'You win. Play again?'),
+                        ),
+                      }
+                    else
+                      {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => endGameMessage(
+                              endText: 'You lose. Feeling lucky? Play again!'),
+                        ),
+                      }
+                  }
+              }),
     );
   }
 
