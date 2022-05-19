@@ -1,8 +1,10 @@
-import 'package:dice_app/start_page.dart';
+import 'package:dice_app/pages/start_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 class DicePage extends StatefulWidget {
+  static const String id = 'dice_page';
+
   @override
   _DicePageState createState() => _DicePageState();
 }
@@ -119,6 +121,7 @@ class _DicePageState extends State<DicePage> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             child: Text(

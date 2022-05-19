@@ -1,15 +1,18 @@
+import 'package:dice_app/pages/dice_page.dart';
+import 'package:dice_app/pages/start_page.dart';
 import 'package:flutter/material.dart';
-import 'start_page.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Roll the dice'),
-      ),
-      body: StartPage(),
-    ),
-  ));
+void main() => runApp(DiceGame());
+
+class DiceGame extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: StartPage.id,
+      routes: {
+        StartPage.id: (context) => StartPage(),
+        DicePage.id: (context) => DicePage(),
+      },
+    );
+  }
 }
-
