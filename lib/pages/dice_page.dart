@@ -15,7 +15,7 @@ class _DicePageState extends State<DicePage> {
   int playerNumber;
   int randomNumber = Random().nextInt(12 - 3) + 3;
 
-//Method for when the player rolles the dice
+//When the player rolles the dice
   void changeDiceFace() {
     setState(() {
       leftDiceNumber = Random().nextInt(6) + 1; //add + 1 so I never get 0
@@ -101,7 +101,7 @@ class _DicePageState extends State<DicePage> {
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) =>
-                              endGameMessage(endText: 'You win. Play again?'),
+                              endGameMessage(endText: 'YOU WIN. Play again?'),
                         ),
                       }
                     else
@@ -109,7 +109,7 @@ class _DicePageState extends State<DicePage> {
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => endGameMessage(
-                              endText: 'You lose. Feeling lucky? Play again!'),
+                              endText: 'YOU LOSE. Feeling lucky? Play again!'),
                         ),
                       }
                   }
@@ -119,47 +119,49 @@ class _DicePageState extends State<DicePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            child: Text(
-              '$randomNumber',
-              style: TextStyle(
-                  decoration: TextDecoration.none, color: Colors.white),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              child: Text(
+                '$randomNumber',
+                style: TextStyle(
+                    decoration: TextDecoration.none,
+                    color: Colors.white,
+                    fontSize: 30.0),
+              ),
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.red, width: 5.0),
+              ),
             ),
-            padding: EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.red, width: 10.0),
-            ),
-          ),
-          Expanded(
-            child: Row(
+            Row(
               children: [
                 newDice(diceNum: leftDiceNumber),
                 newDice(diceNum: rightDiceNumber)
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: scoreKeeper,
-          ),
-          Container(
-            child: TextButton(
-              child: Text('Go back'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return StartPage();
-                  }),
-                );
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: scoreKeeper,
             ),
-          )
-        ],
+            Container(
+              child: TextButton(
+                child: Text('Go back'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return StartPage();
+                    }),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -8,11 +8,13 @@ class DiceGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        title: 'Dice App',
+        theme: ThemeData.dark(),
       initialRoute: StartPage.id,
       routes: {
         StartPage.id: (context) => StartPage(),
         DicePage.id: (context) => DicePage(),
-      },
+        }
     );
   }
 }
